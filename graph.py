@@ -7,14 +7,14 @@ structure de graph et de noeud primal
 class Graph:
 
 	def __init__(self):
-		self.noeuds = []
+		self.noeuds = set()
 		self.nb_node = 0
 
 	def add_node(self, id):
-		self.noeuds.append(Noeud(id))
+		self.noeuds.add(Noeud(id))
 		self.nb_node +=1
  
-	#on ne verifie pas si le noeud id a deja node en voisin TODO
+	
 	def add_voisin(self, id, node):
 		for n in self.noeuds:
 			if(n.id == id):
@@ -36,17 +36,17 @@ class Graph:
 class Noeud:
 	def __init__(self, id):
 		self.id = id
-		self.voisins = []
+		self.voisins = set()
 
 	def add_voisin(self, node):
-		self.voisins.append(node)
+		self.voisins.add(node)
 
-	def afficher(self):
-		res = "node:", self.id, " voisin : "
+	def __str__(self):
+		res = "node_id: " + str(self.id) + "\tvoisin:{"
 		for node in self.voisins:
-			res += "",node.id
+			res = res + str(node.id) +","
 
-		print res
+		return res + "}"
 
 
 
@@ -87,30 +87,31 @@ def clique_init(graph):
 
 
 #return les noeuds communs entre l'ensemble P et U
-#P et U sont des tableaux
+#P et U sont des ensembles
 def inter(P,U):
-	p = list(P)
+	p = list(P) #set to list for sorting
+	u = list(U)
 	p = sorted(p)
-	U = sorted(U)
+	u = sorted(u)
 
 	i = 0
 	j = 0
 
-	res = []
+	res = set()
 	
 	#print "limite de P : ", len(P)
 	#print "limite de U : ", len(U)
 
-	while(i<len(p) and j<len(U)): #fin du parcours d'un des deux tableaux
+	while(i<len(p) and j<len(u)): #fin du parcours d'un des deux tableaux
 		#print "i:", i
 		#print "j;", j
 
-		if (p[i].id < U[j].id):
+		if (p[i].id < u[j].id):
 			i+=1
-		elif (p[i].id > U[j].id):
+		elif (p[i].id > u[j].id):
 			j+=1
 		else:
-			res.append(p[i])
+			res.add(p[i])
 			i+=1
 			j+=1
 
@@ -118,8 +119,9 @@ def inter(P,U):
 	
 #renvoie le noeud pivot candidat pour Tomita
 #u \ argmax card|P inter voisin(u)|
-#return -1 si pas de pivot mais devrait jamais arriver
-#P et X object : set
+#return 	-1 si pas de pivot mais devrait jamais arriver
+#		id du noeud
+#P et X object : ensemble
 def pivot(P, X):
 	noeuds = P.union(X)
 
@@ -136,7 +138,38 @@ def pivot(P, X):
 			res = node
 		i+=1
 
-	return res.id
+	return res
+
+#algo de recherche de clique maximale
+# 
+def BronKerbosch(P, R, X):
+	if len(P.union(X))==0: #ens. vide
+		print "FIN"
+		return R #clique maximale
+	
+	u = pivot(P,X)	#noeud pivot
+	print "pivot u : ", u
+	p = P.difference(u.voisins) # P \ voisins(u)
+	for node in p:
+		print "entree de boucle ==P:",len(P)," R:",len(R)," X:",len(X)
+		p_tmp = inter(P, u.voisins)
+		R.add(u)
+		x_tmp = inter(X, u.voisins)
+		print "\napres recalcule  ==P:",len(p_tmp)," R:",len(R)," X:",len(x_tmp)
+		
+		BronKerbosch(p_tmp, R, x_tmp)
+		print "end recur"
+		
+		for n in P:
+			print n
+		print "il faut remove : U = ", u		
+		P.discard(u)
+		X.add(u)
+
+
+
+
+
 
 
 def test_inter(graph):
@@ -144,7 +177,7 @@ def test_inter(graph):
 	res = inter([graph.get_node(3), graph.get_node(5), Noeud(8)], graph.noeuds)
 
 	for node in res:
-		node.afficher() #expected : 3,5
+		print node #expected : 3,5
 
 
 def test_pivot(graph):
@@ -178,6 +211,23 @@ def test_pivot(graph):
 	print res #expected 7 in output
 
 
+def test_bron(graph):
+	P = set()
+	R = set()
+	X = set()
+
+	P = set(graph.noeuds)
+
+	for n in P:
+		print n
+
+	BronKerbosch(P,R,X)
+	
+	print "\n\n\n====++CLIQUE MAX++======\n"
+	for n in R:
+		print n
+
+
 	
 	
 
@@ -185,7 +235,8 @@ graph = Graph()
 clique_init(graph)
 
 #test_inter(graph)
-test_pivot(graph)
+#test_pivot(graph)
+test_bron(graph)
 
 
 
