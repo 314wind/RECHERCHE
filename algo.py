@@ -42,7 +42,7 @@ def pivot(P, X, graph):
     noeuds = P.union(X)
     assert(len(P) + len(X) >= len(noeuds))
     
-    print "DEBUG :"
+    print ("DEBUG :")
     print_set(P, noeuds, X)
     
     maxi = -1 
@@ -64,7 +64,7 @@ def pivot(P, X, graph):
 def print_set(P,R,X):
 	print ("====track==== : \nR:",)
 	print ("{",)
- 	print (R ,"}",)
+	print (R ,"}",)
 	print ("\tP:",)
 	print ("{",)
 	print (P ,"}",)
@@ -86,11 +86,11 @@ def BronKerbosch(P, R, X):
 	u = pivot(P,X)	#noeud pivot
 	#print "pivot u : ", u
 	p = P.difference(u.voisins) # P \ voisins(u)
-	print "P :"
+	print ("P :")
 	print_set(P, {}, {})
-	print "u.voisins"
+	print ("u.voisins")
 	print_set(u.voisins, {}, {})
-	print "p"
+	print ("p")
 	print_set(p, {}, {})
 
 	assert(len(p) < len(P))

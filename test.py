@@ -36,21 +36,19 @@ def test_pivot(graph):
 	P.add(1) 
 	P.add(2) 
 	P.add(3)
+	X.add(4)
 	res = algo.pivot(P, X, graph)
 
-	assert(res==1) 	
+	assert(res==4) 	
 
-
-	P.add(4)
-	res = algo.pivot(P, X, graph)
-	assert(res==2)
-	
 	P.clear()
-	
-	P.add(5)
-	P.add(6)
-	res = pivot(P, X)
-	assert(res==7) 
+
+	P.add(2)
+	P.add(4)
+	X.add(1)
+	res = algo.pivot(P, X, graph)
+	assert(res==1)
+	 
 
 
 def test_bron(graph):
@@ -65,9 +63,9 @@ def test_bron(graph):
 	"""
 	BronKerbosch(P,R,X)
 	
-	print "\n====++CLIQUE MAX++======\n"
+	print ("\n====++CLIQUE MAX++======\n")
 	for n in R:
-		print n
+		print (n)
 
 
 def test_structure():

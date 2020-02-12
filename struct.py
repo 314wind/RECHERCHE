@@ -41,6 +41,7 @@ class Graph:
 	def keys(self):
 		return self.noeuds.keys()
 
+"""
 class Noeud:
 	def __init__(self, id):
 		self.id = id
@@ -56,5 +57,6 @@ class Noeud:
 
 		return res + "}"
 
+"""
 
 
