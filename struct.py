@@ -16,7 +16,7 @@ class Graph:
 
 			
 	def __str__(self):
-		print "===Graph==nb node", len(self.noeuds), "===\n" 
+		print ("===Graph==nb node", len(self.noeuds), "===\n" )
 		return str(self.noeuds)
 
 	def clear(self):

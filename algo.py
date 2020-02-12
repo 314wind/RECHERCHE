@@ -13,12 +13,12 @@ def inter(P,U):
 
 	res = set()
 	
-	#print "limite de P : ", len(P)
-	#print "limite de U : ", len(U)
+	#print ("limite de P : ", len(P))
+	#print ("limite de U : ", len(U))
 
 	while(i<len(p) and j<len(u)): #fin du parcours d'un des deux tableaux
-		#print "i:", i
-		#print "j;", j
+		#print ("i:", i)
+		#print ("j;", j)
 
 		if (p[i] < u[j]):
 			i+=1
@@ -38,48 +38,48 @@ def inter(P,U):
 #P et X object : ensemble
 #O(n^2log(n)) a verif
 def pivot(P, X, graph):
-	noeuds = P.union(X)
 
-	maxi = -999 #-inf
-	i = 0
-	res = -1
-	for node in noeuds: #P U X 
-		voisins = graph.get_voisins(node) #set
-		intersect = inter(P, voisins)
-		tmp = len(intersect)
-		if(tmp > maxi):
-			maxi = tmp
-			res = node
-		i+=1
+    noeuds = P.union(X)
+    assert(len(P) + len(X) >= len(noeuds))
+    
+    print "DEBUG :"
+    print_set(P, noeuds, X)
+    
+    maxi = -1 
+    i = 0
+    res = -1
+    
+    for node in noeuds: #P U X 
+        voisins = graph.get_voisins(node) #set
+        intersect = inter(P, voisins)
+        tmp = len(intersect)
+        if(tmp > maxi):
+            maxi = tmp
+            res = node
+        i+=1
 
-	return res
+    return res
 
 
 def print_set(P,R,X):
-	print "====track==== : \nR:",
-	print"{",
-	for n in R: 
- 		print n.id ,",",
- 	print"}", R ,
-
-	print "\tP:",
-	print"{",
-	for n in P:
-		print n.id ,",",
-	print"}", P ,
-	print"\tX:", 
-
-	print"{",
-	for n in X:
-		print n.id ,",",
-	print"}", X
-	print "\n//"
+	print ("====track==== : \nR:",)
+	print ("{",)
+ 	print (R ,"}",)
+	print ("\tP:",)
+	print ("{",)
+	print (P ,"}",)
+	print ("\tX:",)
+	print ("{",)
+	print (X, "}")
+	print ("\n//")
+    
+    
 #algo de recherche de clique maximale
 # 
 def BronKerbosch(P, R, X):
 	#print_set(P,R,X)
 	if (len(P)== 0 and len(X)==0): #ens. vide
-		print "Clique found : "
+		print ("Clique found : ")
 		#print_set({}, R, {})
 		return R #clique maximale
 	

@@ -4,8 +4,8 @@ import algo
 
 
 def test_inter(graph):
-	print "\t===test_inter du graph : "
-	print graph , "\n"
+	print ("\t===test_inter du graph : ")
+	print (graph , "\n")
 	##j'ai reprogramme l'intersection de deux ensemble en O(n)
 	#n etant la longueur la plus petite des deux ensemble a test
 	nb_node = graph.nb_node()
@@ -23,8 +23,8 @@ def test_inter(graph):
 	
 	inter = algo.inter(P,X)
 	assert(len(inter)==2)
-	print  "intersection", P, " et " , X, "= ", inter
-	print "\n\tend_test_inter==\n"
+	print ("intersection", P, " et " , X, "= ", inter)
+	print ("\n\tend_test_inter==\n")
 	
 
 
@@ -109,6 +109,6 @@ def test_structure():
 	assert(len(graph.values()) == 3)
 	assert(len(graph.effective_values())==2)
 
-	print graph
-	print graph.values()
-	print graph.effective_values()
+	print (graph)
+	print (graph.values())
+	print (graph.effective_values())
