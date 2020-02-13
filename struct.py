@@ -1,3 +1,9 @@
+"""
+objet graph
+
+author : gouth
+"""
+
 class Graph:
 
 	def __init__(self):

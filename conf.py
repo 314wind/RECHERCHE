@@ -1,3 +1,10 @@
+"""
+fichier configuration initiale du graph
+
+author : gouth
+
+"""
+
 def clique_init(graph):
 	graph.clear()
 
@@ -77,7 +84,7 @@ def clique_init2(graph):
 def clique_init3(graph):
 	graph.clear()
 
-	for i in range(1, 7): #ajout de 8 noeuds
+	for i in range(1, 7): 
 		graph.add_node(i)
 
 	 
@@ -103,3 +110,28 @@ def clique_init3(graph):
 	graph.add_voisin(6, 4)
 
 
+def clique_init_wiki(graph):
+	graph.clear()
+
+	for i in range(1, 7):
+		graph.add_node(i)
+
+	graph.add_voisin(1, 2)
+	graph.add_voisin(1, 5)
+
+	graph.add_voisin(2, 1)
+	graph.add_voisin(2, 3)
+	graph.add_voisin(2, 5)
+	
+	graph.add_voisin(3, 2)
+	graph.add_voisin(3, 4)
+
+	graph.add_voisin(4, 3)
+	graph.add_voisin(4, 5)
+	graph.add_voisin(4, 6)
+
+	graph.add_voisin(5, 1)
+	graph.add_voisin(5, 2)
+	graph.add_voisin(5, 4)
+
+	graph.add_voisin(6, 4)

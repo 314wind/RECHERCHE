@@ -1,4 +1,10 @@
+"""
+test de graph avec la configuration 
+clique_init 
+(cF conf.py)
 
+author: gouth
+"""
 import struct
 import algo 
 
@@ -57,16 +63,17 @@ def test_bron(graph):
 	X = set()
 
 	P = set(graph.noeuds)
+
 	"""
 	for n in P:
 		print n
 	"""
-	BronKerbosch(P,R,X)
-	
+	algo.BronKerbosch(P,R,X,graph,0)
+	"""
 	print ("\n====++CLIQUE MAX++======\n")
 	for n in R:
 		print (n)
-
+	"""
 
 def test_structure():
 	"""
