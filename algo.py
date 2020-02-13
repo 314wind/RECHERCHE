@@ -1,4 +1,4 @@
-
+   
 #return les noeuds communs entre l'ensemble P et U
 #P et U sont des ensembles
 #O(nlog(n)) pour le tri puis simple parcours O(n)
